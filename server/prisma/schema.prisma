@@ -6,3 +6,56 @@ datasource db {
   provider = "sqlite"
   url      = env("DATABASE_URL")
 }
+
+model Source {
+  id        Int      @id @default(autoincrement())
+  name      String   @unique
+  leads     Lead[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Status {
+  id            Int             @id @default(autoincrement())
+  name          String          @unique
+  leads         Lead[]
+  statusHistory StatusHistory[]
+  createdAt     DateTime        @default(now())
+  updatedAt     DateTime        @updatedAt
+}
+
+model Lead {
+  id            Int             @id @default(autoincrement())
+  externalId    String          @unique
+  firstName     String
+  lastName      String
+  email         String
+  phone         String?
+  vehicle       String
+  sourceId      Int
+  statusId      Int
+  source        Source          @relation(fields: [sourceId], references: [id], onDelete: Restrict)
+  status        Status          @relation(fields: [statusId], references: [id], onDelete: Restrict)
+  statusHistory StatusHistory[]
+  createdAt     DateTime        @default(now())
+  updatedAt     DateTime        @updatedAt
+
+  @@index([sourceId])
+  @@index([statusId])
+  @@index([createdAt])
+  @@index([externalId])
+  @@index([lastName, firstName])
+}
+
+model StatusHistory {
+  id        Int      @id @default(autoincrement())
+  leadId    Int
+  statusId  Int
+  lead      Lead     @relation(fields: [leadId], references: [id], onDelete: Cascade)
+  status    Status   @relation(fields: [statusId], references: [id], onDelete: Restrict)
+  createdAt DateTime @default(now())
+
+  @@index([leadId])
+  @@index([statusId])
+  @@index([createdAt])
+}
