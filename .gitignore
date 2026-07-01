@@ -5,6 +5,8 @@ dist
 .env.*
 !.env.example
 *.log
+*.tsbuildinfo
 server/prisma/dev.db
 server/prisma/dev.db-journal
 plan.md
+.lh
