@@ -11,7 +11,12 @@
     "build": "npm run build --workspace server && npm run build --workspace client",
     "lint": "npm run lint --workspace server && npm run lint --workspace client",
     "format": "prettier --write .",
-    "format:check": "prettier --check ."
+    "format:check": "prettier --check .",
+    "db:generate": "npm run prisma:generate --workspace server",
+    "db:migrate": "npm run prisma:migrate --workspace server",
+    "db:seed": "npm run prisma:seed --workspace server",
+    "db:studio": "npm run prisma:studio --workspace server",
+    "db:apply:sqlite": "sqlite3 server/prisma/dev.db \".read server/prisma/migrations/20260701154000_init_lead_schema/migration.sql\""
   },
   "devDependencies": {
     "concurrently": "^9.2.1",

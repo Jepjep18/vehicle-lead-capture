@@ -63,7 +63,10 @@ export function LeadDashboard() {
             onEdit={setEditingLead}
             onDelete={setDeletingLead}
           />
-          <LeadsPagination pagination={pagination} onPageChange={(page) => updateParams({ page })} />
+          <LeadsPagination
+            pagination={pagination}
+            onPageChange={(page) => updateParams({ page })}
+          />
         </section>
       </div>
 

@@ -14,7 +14,13 @@ type LeadFormDialogProps = {
   onSubmit: (values: LeadFormValues) => Promise<void>;
 };
 
-export function LeadFormDialog({ lead, sources, statuses, onClose, onSubmit }: LeadFormDialogProps) {
+export function LeadFormDialog({
+  lead,
+  sources,
+  statuses,
+  onClose,
+  onSubmit,
+}: LeadFormDialogProps) {
   const [values, setValues] = useState<LeadFormValues>(() =>
     getLeadFormValues(lead, sources, statuses),
   );

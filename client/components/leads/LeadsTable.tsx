@@ -48,9 +48,7 @@ export function LeadsTable({ leads, isLoading, totalRecords, onEdit, onDelete }:
                 <td className="border-b border-slate-100 px-4 py-3 font-medium text-slate-950">
                   {lead.firstName} {lead.lastName}
                 </td>
-                <td className="border-b border-slate-100 px-4 py-3 text-slate-600">
-                  {lead.email}
-                </td>
+                <td className="border-b border-slate-100 px-4 py-3 text-slate-600">{lead.email}</td>
                 <td className="border-b border-slate-100 px-4 py-3 text-slate-600">
                   {lead.phone ?? '-'}
                 </td>

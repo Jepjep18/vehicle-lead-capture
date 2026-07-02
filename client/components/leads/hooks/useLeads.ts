@@ -10,20 +10,22 @@ export function useLeads() {
   const [params, setParams] = useState<LeadListParams>(DEFAULT_LEAD_PARAMS);
   const [isLoading, setIsLoading] = useState(true);
 
-  const loadLeads = useCallback(async (nextParams: LeadListParams = params) => {
-    setIsLoading(true);
+  const loadLeads = useCallback(
+    async (nextParams: LeadListParams = params) => {
+      setIsLoading(true);
 
-    try {
-      const data = await fetchLeads(nextParams);
-      setLeads(data.leads);
-      setPagination(data.pagination);
-    } catch (error) {
-      toast.error(error instanceof Error ? error.message : 'Unable to load leads');
-    } finally {
-      setIsLoading(false);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [params]);
+      try {
+        const data = await fetchLeads(nextParams);
+        setLeads(data.leads);
+        setPagination(data.pagination);
+      } catch (error) {
+        toast.error(error instanceof Error ? error.message : 'Unable to load leads');
+      } finally {
+        setIsLoading(false);
+      }
+    },
+    [params],
+  );
 
   useEffect(() => {
     void loadLeads();
